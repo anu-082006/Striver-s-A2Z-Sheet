@@ -8,12 +8,11 @@ class Solution {
         }
         if(n==size) {
             return head.next;
-        }how for i=0 size-n
-
+        }
         temp = head;
         ListNode prev = null;
-        int index = size-n;
-        for(int i=0; i<index; i++) {
+        int index = size-n+1;
+        for(int i=1; i<index; i++) {
             prev = temp;
             temp = temp.next;
         }
