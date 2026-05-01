@@ -1,0 +1,6 @@
+class Solution {
+    public ListNode deleteHead(ListNode head) {
+       head = head.next;
+       return head;
+    }
+}
