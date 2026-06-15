@@ -1,0 +1,24 @@
+public class Solution {
+    public ListNode detectCycle(ListNode head) {
+        // boolean cycle = false; flag is unnecessary because the state of fast and fast.next already tells you whether a cycle was found.
+        ListNode slow = head;
+        ListNode fast = head;
+        while(fast!=null && fast.next!=null) {
+            slow = slow.next;
+            fast = fast.next.next;
+            if(slow == fast) {
+                break;
+            }
+        }
+        if(fast==null || fast.next==null) {
+            return null;
+        }
+        slow = head;
+        // ListNode prev = null; not needed here since only used for removing.
+        while(slow!=fast) {
+            slow =slow.next;
+            fast = fast.next;
+        }
+        return fast;
+    }
+}
