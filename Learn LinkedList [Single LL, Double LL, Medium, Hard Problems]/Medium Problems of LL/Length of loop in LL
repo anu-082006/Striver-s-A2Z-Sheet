@@ -1,0 +1,29 @@
+class Solution {
+     public int findLengthOfLoop(ListNode head) {
+        ListNode slow = head;
+        ListNode fast = head;
+        while(fast!=null && fast.next!=null) {
+            slow = slow.next;
+            fast = fast.next.next;
+            if(slow==fast) {
+                break;
+            }
+        }
+        if(fast==null || fast.next==null) {
+            return 0;
+        }
+        slow = head;
+        ListNode prev = null;
+        while(slow!=fast) {
+            prev = fast;
+            slow = slow.next;
+            fast = fast.next;
+        }
+        int d = 0;
+        while(fast!=prev) {
+            d++;
+            fast = fast.next;
+        }
+        return d+1;//or - int d = 1;
+     }
+ }
