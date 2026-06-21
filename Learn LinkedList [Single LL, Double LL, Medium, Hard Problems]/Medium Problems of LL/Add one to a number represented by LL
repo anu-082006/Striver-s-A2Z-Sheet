@@ -1,0 +1,37 @@
+class Solution {
+    public ListNode addOne(ListNode head) {
+        int carry = 1;
+        ListNode curr = head;
+        ListNode prev = null;
+        ListNode next;//uninitialize dbecause even loop fails since its not read outside loop anywhere, no erroer
+        ListNode last = head;//read outside loop
+        while(curr!=null) {
+            next = curr.next;
+            curr.next = prev;
+            prev = curr;
+            curr = next;
+        }
+        head = prev;
+        ListNode temp = head;
+        while(temp != null) {
+            int sum = temp.val + carry;
+            temp.val = sum % 10;
+            carry = sum/10;
+            last = temp;
+            temp = temp.next;
+        }
+        if(carry == 1) {
+            last.next = new ListNode(carry);
+        }
+        curr = head;
+        prev = null;
+        while(curr!=null) {
+            next = curr.next;
+            curr.next = prev;
+            prev = curr;
+            curr = next;
+        }
+        head = prev;
+        return head;
+    }
+}
