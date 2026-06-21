@@ -1,0 +1,33 @@
+class Solution {
+    public ListNode sortList(ListNode head) {
+        ListNode dummy0 = new ListNode(0);
+        ListNode dummy1 = new ListNode(0);
+        ListNode dummy2 = new ListNode(0);
+
+        ListNode tail0 = dummy0;
+        ListNode tail1 = dummy1;
+        ListNode tail2 = dummy2;
+
+        ListNode temp = head;
+
+        while(temp!=null) {
+            if(temp.data==0) {
+                tail0.next = temp;
+                tail0 = tail0.next;
+            }
+            else if(temp.data==1) {
+                tail1.next = temp;
+                tail1 = tail1.next;
+            }
+            else if(temp.data==2) {
+                tail2.next = temp;
+                tail2 = tail2.next;
+            }
+            temp = temp.next;
+        }
+        tail0.next = (dummy1 != null)? dummy1.next:dummy2.next;//if no 1's
+        tail1.next = dummy2.next;
+        tail2.next = null;//does nothing when no 2's, but req otherwise
+        return dummy0.next;
+    }
+}
