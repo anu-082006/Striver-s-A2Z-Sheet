@@ -1,0 +1,46 @@
+// class Solution {
+//     public ListNode rotateRight(ListNode head, int k) {
+//         if (head == null || head.next == null || k == 0) {
+//             return head;
+//         }
+//         ListNode temp = head;
+//         for(int i=1; i<=k; i++) {
+//             temp = head;
+//             while(temp != null && temp.next != null && temp.next.next != null) {
+//                 temp = temp.next;
+//             }
+//             ListNode last = temp.next;
+//             temp.next = null;
+//             last.next = head;
+//             head = last;
+//         }
+//         return head;
+//     }
+// }
+//crct but exceeds timelimit
+
+class Solution {
+    public ListNode rotateRight(ListNode head, int k) {
+         if (head == null || head.next == null || k == 0) {
+            return head;
+        }
+        ListNode temp = head;
+        int size = 1;
+        while(temp.next!=null) {
+            size++;
+            temp = temp.next;
+        }
+        k %= size;//useful for values above 5
+        if(k==0) {
+            return head;
+        }
+        temp.next = head;//create temp circular ll(make connection with to be roatated to head)
+        ListNode newLast = head; 
+        for(int i=1; i<size-k; i++) {
+            newLast = newLast.next; //find the new last, stops at the node after which the next part shifts to front
+        }
+        ListNode newHead = newLast.next;//from part to be rotated
+        newLast.next = null;//break part to be rotated and newLast
+        return newHead;
+    }
+}
