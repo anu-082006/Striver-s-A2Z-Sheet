@@ -1,0 +1,18 @@
+class Solution {
+    public double myPow(double x, int n) {
+        double ans = 1;//works even if n=0
+        long N = n; // Use long to prevent overflow when negating Integer
+        if(N<0) { //if N is -ve
+            x = 1/x;
+            N = -N;
+        }
+        while(N>0) {
+            if((N&1) != 0) {
+                ans *= x;
+            }
+            x = x*x;
+            N = N>>1;
+        }
+        return ans;
+    }
+}
