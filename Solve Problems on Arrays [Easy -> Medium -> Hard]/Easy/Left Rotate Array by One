@@ -1,0 +1,33 @@
+// class Solution {
+//     public void rotateArrayByOne(int[] nums) {
+//         int n = nums.length;
+//         for(int i=0; i<n-1; i++) {//for left shift, this is right shift
+//             int temp = nums[i];
+//             nums[i] = nums[i+1];
+//             nums[i+1] = temp;
+//         } 
+//     }
+// }
+
+// *** Logic - sending to left - left rotate, sending to right - right rotate
+//right shift for k(here k=1) elements
+class Solution {
+    public void reverse(int[] nums, int start, int end) {
+        while(start < end) {
+            int temp = nums[start];
+            nums[start] = nums[end];
+            nums[end] = temp;
+            start++;
+            end--;
+        }
+    }
+    public void rotateArrayByOne(int[] nums) {
+        int n = nums.length;
+        reverse(nums, 0, n-1);//(5, 4, 3, 2, 1)
+        reverse(nums, 0, n-2);//(2, 3, 4, 5, 1)
+        //no need reversing 1 element
+        // reverse(nums, 0, n-1);
+        // reverse(nums, 0, n-k-1);
+        // reverse(nums, n-k, n-1);
+    }
+}
