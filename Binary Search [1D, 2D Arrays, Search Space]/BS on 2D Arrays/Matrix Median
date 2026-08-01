@@ -1,0 +1,22 @@
+// class Solution {
+//     public int findMedian(int[][] matrix) {
+//         int m = matrix.length;
+//         int n = matrix[0].length;
+//         int[] sorted = new int[m*n];
+//         int index = 0;
+//         for(int i=0; i<m; i++) {
+//             for(int j=0; j<n; j++) {
+//                 sorted[index++] = matrix[i][j];
+//             }
+//         }
+//         Arrays.sort(sorted);
+//         int total = sorted.length;
+//         return sorted[(total)/2];// it is (total+1)/2, since 0-based indexing
+//     }
+// }
+
+class Solution {
+    public int findMedian(int[][] matrix) {
+        
+    }
+}
