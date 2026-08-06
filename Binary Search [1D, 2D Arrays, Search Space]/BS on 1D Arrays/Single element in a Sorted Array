@@ -1,0 +1,21 @@
+//In a sorted array where every duplicate number appears exactly twice, the single unique element always appears at an even index (assuming 0-based indexing).
+class Solution {
+    public int singleNonDuplicate(int[] nums) {
+        int n = nums.length;
+        int low = 0, high = n-1;
+
+        while(low<high) {
+            int mid = low + (high - low)/2;
+            if(mid % 2 == 1) {
+                mid--;//making sure mid is even
+            }
+            if(nums[mid] == nums[mid+1]) {
+                low = mid+2;
+            }
+            else {
+                high = mid; //high = mid - 1 + 2
+            }
+        }
+        return nums[low];
+    }
+}
