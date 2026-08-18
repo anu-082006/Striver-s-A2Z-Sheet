@@ -1,0 +1,33 @@
+class Solution {
+    public boolean search(int[] nums, int target) {
+        int low = 0, high = nums.length-1;
+        while(low <= high) {
+            int mid = low + (high - low)/2;
+            if(nums[mid] == target) {
+                return true;
+            }
+            if(nums[mid] == nums[low] && nums[mid] == nums[high]) {//[10111]
+                low = low + 1;
+                high = high - 1;
+                continue;
+            }
+            if(nums[low] <= nums[mid]) {//left-sorted
+                if(nums[low] <= target && target <= nums[mid]) {//target lies in left half
+                    high = mid - 1;
+                }
+                else {//target lies in right half
+                    low = mid + 1;
+                }
+            }
+            else {//right half sorted
+                if(nums[mid] <= target && target <= nums[high]) {//target lies in right half
+                    low = mid + 1;
+                }
+                else {//target lies in left half
+                    high = mid - 1;
+                }
+            }
+        }
+        return false;
+    }
+}
