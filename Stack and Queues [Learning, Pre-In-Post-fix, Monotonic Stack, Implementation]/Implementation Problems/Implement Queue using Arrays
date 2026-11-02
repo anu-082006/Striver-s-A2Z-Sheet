@@ -1,0 +1,92 @@
+// class ArrayQueue {
+//     static int[] arr;
+//     static int n = 100005;//because no input in constructor to pass size
+//     static int rear;
+
+//     public ArrayQueue() {
+//         arr = new int[n];
+//         rear = -1;
+//     }
+
+//     public void push(int x) {
+//        if(rear == n-1) {
+//         return;
+//        }
+//        rear = rear + 1;
+//        arr[rear] = x;
+//     }
+
+//     public int pop() {
+//       if(isEmpty()) {
+//         return -1;
+//       }
+//       int front = arr[0];
+//       for(int i=0; i<rear; i++) {
+//         arr[i] = arr[i+1];
+//       }
+//       rear = rear - 1;
+//       return front;
+//     }
+
+//     public int peek() {
+//         return arr[0];
+//     }
+
+//     public boolean isEmpty() {
+//         return rear == -1;
+//     }
+// }
+//front always is arr[0]
+//or - using circular queue - (front+1)%n, (rear+1)%n
+//all O(1), no fixed size, no fixed front/rear
+class ArrayQueue {
+    static int[] arr;
+    static int n = 100005;
+    static int rear;
+    static int front;
+
+    public ArrayQueue() {
+        arr = new int[n];
+        front = -1;
+        rear = -1;
+    }
+
+    public void push(int x) {
+        if(isFull()) {
+            return;
+        }
+       rear = (rear + 1)%n;
+       arr[rear] = x;
+       if(front == -1) {
+        front = 0;
+       }//1st element
+    }
+
+    public int pop() {
+      if(isEmpty()) {
+        return -1;
+      }
+      int result = arr[front];
+      if(rear == front) {
+        rear = front = -1;
+      }//1 element
+      else {
+        front = (front+1)%n;
+      }
+      return result;
+    }
+
+    public int peek() {
+        if(isEmpty()) {
+            return -1;
+        }
+        return arr[front];
+    }
+
+    public boolean isEmpty() {
+        return rear == -1 && front == -1;
+    }
+    public boolean isFull() {
+        return (rear+1)%n == front;
+    }
+}
