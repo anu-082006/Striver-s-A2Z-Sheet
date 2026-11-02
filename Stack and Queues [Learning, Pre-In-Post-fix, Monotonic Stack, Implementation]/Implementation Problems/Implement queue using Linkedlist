@@ -1,0 +1,54 @@
+class LinkedListQueue {
+    Node head;
+    Node tail;
+    public LinkedListQueue() {
+    }
+
+    static class Node {
+        int data;
+        Node next;
+        Node(int data) {
+            this.data = data;
+            this.next = null;
+        }
+    }
+
+    public void push(int x) {
+       Node newNode = new Node(x);
+       if(isEmpty()) {
+        head = tail = newNode;
+       }
+       else {
+        tail.next = newNode;
+        //newNode.next = null; - anyhow null
+        tail = newNode;
+       }
+    }
+
+    public int pop() {
+      if(isEmpty()) {
+        return -1;
+      }
+      int pop = head.data;
+      head = head.next;
+      return pop;
+    }
+
+    public int peek() {
+        if(isEmpty()) {
+        return -1;
+        }
+        return head.data;
+    }
+
+    public boolean isEmpty() {
+        return head == null; //Head being null is sufficient to determine emptiness
+    }
+}
+
+// Tail is Just a Shortcut Pointer
+
+// The tail pointer doesn't actually define the structure of the queue; it is simply an optimization shortcut.
+// • Without a tail pointer, to add a new item, you would have to start at the head and loop through every single node until you found the end. This takes O(N) time.
+// • With a tail pointer, you jump straight to the end instantly. This takes O(1) time.
+// Because tail is just a utility pointer referencing the last node, the absolute truth of whether data exists always rests with head
