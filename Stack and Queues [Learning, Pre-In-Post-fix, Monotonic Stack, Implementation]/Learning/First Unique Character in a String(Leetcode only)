@@ -1,0 +1,40 @@
+// queue and freq array
+class Solution {
+    public int firstUniqChar(String s) {
+        Queue<Character> q = new LinkedList<>();
+        int[] freq = new int[26];//if using freq[ch] instead of freq[ch-'a'] then 256
+        for(int i=0; i<s.length(); i++) {
+            char ch = s.charAt(i);
+            q.add(ch);
+            freq[ch - 'a']++;
+        }
+        int i = 0;
+        while(!q.isEmpty()) {
+            if(freq[q.peek() - 'a'] == 1) {
+                return i;
+            }
+            else {
+                q.remove();
+                i++;
+            }
+        }
+    return -1;
+    }
+}
+//without queue, only freq array - less TC
+// class Solution {
+//     public int firstUniqChar(String s) {
+//         int[] freq = new int[26];//if using freq[ch] instead of freq[ch-'a'] then 256
+//         for(int i=0; i<s.length(); i++) {
+//             char ch = s.charAt(i);
+//             freq[ch - 'a']++;
+//         }
+//         for(int i=0; i<s.length(); i++) {
+//             char ch = s.charAt(i);
+//             if(freq[ch - 'a'] == 1) {
+//                 return i;
+//             }
+//         }
+//     return -1;
+//     }
+// }
