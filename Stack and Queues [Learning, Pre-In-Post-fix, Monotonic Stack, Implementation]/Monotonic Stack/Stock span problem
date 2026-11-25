@@ -1,0 +1,21 @@
+class Solution {
+    public int[] stockSpan(int[] arr, int n) {
+        int[] span = new int[n];
+        Stack<Integer> s = new Stack<>();
+        for(int i=0; i<n; i++) {
+            while(!s.isEmpty() && arr[s.peek()] <= arr[i]) {
+                s.pop();
+            }
+            //span = i - prevHigh
+            if(s.isEmpty()) {
+                span[i] = i + 1; // i - (-1)
+            }
+            else {
+                span[i] = i - s.peek();
+            }
+            s.push(i);
+        }
+        return span;
+    }
+}
+
