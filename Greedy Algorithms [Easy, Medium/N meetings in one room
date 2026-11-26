@@ -1,0 +1,24 @@
+class Solution {
+    public int maxMeetings(int[] start, int[] end) {
+       //your code goes here
+       //ArrayList<Integer> ans = new ArrayList<>(); -> not needed here
+       int[][] meetings = new int[start.length][3]; //index, start, end
+       int maxAct = 1;
+       for(int i=0; i<start.length; i++) {
+            meetings[i][0] = i;
+            meetings[i][1] = start[i];
+            meetings[i][2] = end[i];
+       }
+
+       Arrays.sort(meetings, Comparator.comparingDouble(o -> o[2]));//lambda function
+       int lastEnd = meetings[0][2];//imp to intialize only after sorting
+
+       for(int i=1; i<end.length; i++) {
+        if(meetings[i][1] > lastEnd) {//here it is given strictly greater, gte can also be used - depends on the question
+            maxAct++;
+            lastEnd = meetings[i][2];
+        }
+       }
+       return maxAct;
+    }
+}
